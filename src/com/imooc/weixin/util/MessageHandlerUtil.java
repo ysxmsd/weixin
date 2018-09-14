@@ -5,6 +5,7 @@ package com.imooc.weixin.util;
  * @date 2018/9/12.
  */
 
+import com.imooc.weixin.service.BaiduTranslateService;
 import org.dom4j.Document;
 import org.dom4j.Element;
 import org.dom4j.io.SAXReader;
@@ -60,9 +61,21 @@ public class MessageHandlerUtil {
     public static String buildXml(Map<String,String> map) {
         String result;
         String msgType = map.get("MsgType").toString();
-        System.out.println("MsgType:" + msgType);
+        //System.out.println("MsgType:" + msgType);
         if(msgType.toUpperCase().equals("TEXT")){
-            result = buildTextMessage(map, "你发送的消息："+map.get("Content").toString());
+            String content=map.get("Content").toString();
+            String reContext=null;
+            if (content.startsWith("翻译")) {
+                String keyWord = content.replaceAll("^翻译", "").trim();
+                if ("".equals(keyWord)) {
+                    reContext=("前面二字为翻译后面加需要翻译的内容即可");
+                } else {
+                    reContext=BaiduTranslateService.baiduTrans(keyWord);
+                }
+            }else{
+                reContext="你发送的消息："+content;
+            }
+            result = buildTextMessage(map, reContext);
         }else{
             String fromUserName = map.get("FromUserName");
             // 开发者微信号
@@ -95,6 +108,7 @@ public class MessageHandlerUtil {
         String fromUserName = map.get("FromUserName");
         // 开发者微信号
         String toUserName = map.get("ToUserName");
+
         /**
          * 文本消息XML数据格式
          * <xml>

@@ -74,7 +74,7 @@ public class MenuManager {
             btn13.setKey("13");
 
             CommonButton btn14 = new CommonButton();
-            btn14.setName("历史上的今天");
+            btn14.setName("智能翻译");
             btn14.setType("click");
             btn14.setKey("14");
 
