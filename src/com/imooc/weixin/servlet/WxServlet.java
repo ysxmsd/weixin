@@ -1,6 +1,10 @@
 package com.imooc.weixin.servlet;
 
+import com.imooc.weixin.main.MenuManager;
 import com.imooc.weixin.util.MessageHandlerUtil;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -24,9 +28,11 @@ import java.util.Map;
          */
         public final String TOKEN = "imooc";
 
+        private static Logger log = LoggerFactory.getLogger(WxServlet.class);
+
         @Override
         public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-            System.out.println("开始校验签名");
+            log.info("开始校验签名");
             /**
              * 接收微信服务器发送请求时传递过来的4个参数
              */
@@ -40,12 +46,18 @@ import java.util.Map;
             String mySignature = sha1(sortString);
             //校验签名
             if (mySignature != null && mySignature != "" && mySignature.equals(signature)) {
-                System.out.println("签名校验通过。");
+                log.info("签名校验通过。");
                 //如果检验成功输出echostr，微信服务器接收到此输出，才会确认检验完成。
                 //response.getWriter().println(echostr);
                 response.getWriter().write(echostr);
+
+                //创建菜单
+                //MenuManager.wxMenu();
+                //MenuManager mm=new MenuManager();
+                //mm.wxMenu();
+
             } else {
-                System.out.println("签名校验失败.");
+                log.error("签名校验失败.");
             }
 
         }
@@ -118,7 +130,7 @@ import java.util.Map;
             }
         } catch (Exception e) {
             e.printStackTrace();
-            System.out.println("发生异常：" + e.getMessage());
+            log.error("发生异常：" + e.getMessage());
         }
         response.getWriter().println(result);
     }

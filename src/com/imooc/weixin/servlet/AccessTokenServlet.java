@@ -10,6 +10,7 @@ import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 import com.imooc.weixin.common.AccessTokenInfo;
 import com.imooc.weixin.entry.AccessToken;
+import com.imooc.weixin.main.MenuManager;
 import com.imooc.weixin.util.NetWorkHelper;
 
 import javax.servlet.ServletException;
@@ -26,8 +27,10 @@ import javax.servlet.http.HttpServlet;
             urlPatterns = {"/AccessTokenServlet"},
             loadOnStartup = 1,
             initParams = {
-                    @WebInitParam(name = "appId", value = "wx1274d2b852be5d40"),
-                    @WebInitParam(name = "appSecret", value = "9f5c0cb2b9c181c40152127b05584d3b")
+                    //@WebInitParam(name = "appId", value = "wx1274d2b852be5d40"),
+                    //@WebInitParam(name = "appSecret", value = "9f5c0cb2b9c181c40152127b05584d3b")
+                    @WebInitParam(name = "appId", value = "wx36d0d7bac4911b94"),
+                    @WebInitParam(name = "appSecret", value = "a71093ab7753f8316f5b2487f2311a4f")
             })
 
     public class AccessTokenServlet extends HttpServlet {
@@ -50,9 +53,14 @@ import javax.servlet.http.HttpServlet;
                             AccessTokenInfo.accessToken = getAccessToken(appId, appSecret);
                             //获取成功
                             if (AccessTokenInfo.accessToken != null) {
+
+                                //创建菜单
+                                MenuManager.wxMenu();
                                 //获取到access_token 休眠7000秒,大约2个小时左右
                                 Thread.sleep(7000 * 1000);
                                 //Thread.sleep(10 * 1000);//10秒钟获取一次
+
+
                             } else {
                                 //获取失败
                                 Thread.sleep(1000 * 3); //获取的access_token为空 休眠3秒
@@ -77,7 +85,7 @@ import javax.servlet.http.HttpServlet;
          *
          * @return AccessToken
          */
-        private AccessToken getAccessToken(String appId, String appSecret) {
+        public AccessToken getAccessToken(String appId, String appSecret) {
             NetWorkHelper netHelper = new NetWorkHelper();
             /**
              * 接口地址为https://api.weixin.qq.com/cgi-bin/token?grant_type=client_credential&appid=APPID&secret=APPSECRET，其中grant_type固定写为client_credential即可。
