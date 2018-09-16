@@ -1,6 +1,6 @@
 package com.imooc.weixin.servlet;
 
-import com.imooc.weixin.main.MenuManager;
+import com.imooc.weixin.service.ReqService;
 import com.imooc.weixin.util.MessageHandlerUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -16,7 +16,9 @@ import java.security.NoSuchAlgorithmException;
 import java.util.Arrays;
 import java.util.Map;
 
-    /**
+import static com.imooc.weixin.service.ReqService.processRequest;
+
+/**
      * Created by xdp on 2016/1/25.
      * 使用@WebServlet注解配置WxServlet,urlPatterns属性指明了WxServlet的访问路径
      */
@@ -121,10 +123,15 @@ import java.util.Map;
         System.out.println("请求进入");
         String result = "";
         try {
+            result=processRequest(request);
+            /*
+            System.out.println("开始解析消息");
             Map<String, String> map = MessageHandlerUtil.parseXml(request);
-            System.out.println("开始构造消息");
+
+            System.out.println("开始重新构造消息");
             result = MessageHandlerUtil.buildXml(map);
             System.out.println(result);
+            */
             if (result.equals("")) {
                 result = "未正确响应";
             }

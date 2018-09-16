@@ -1,19 +1,8 @@
 package com.imooc.weixin.service;
 
 import com.google.gson.Gson;
-import com.imooc.weixin.entry.TransApi;
-import com.imooc.weixin.entry.TranslateResult;
-import com.imooc.weixin.util.HttpGet;
-import com.imooc.weixin.util.MD5;
-
-import java.io.BufferedReader;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.io.UnsupportedEncodingException;
-import java.net.HttpURLConnection;
-import java.net.URL;
-import java.util.HashMap;
-import java.util.Map;
+import com.imooc.weixin.entry.baidufayi.TransApi;
+import com.imooc.weixin.entry.baidufayi.TranslateResult;
 
 /**
  * @author conshu
@@ -31,12 +20,14 @@ public class BaiduTranslateService {
     private static final String APP_ID = "20180914000207112";
     private static final String SECURITY_KEY = "iUDu6YNf5wqaLpk3QfJ5";
 
+    private static final String TRANS_API_HOST = "http://api.fanyi.baidu.com/api/trans/vip/translate";
+
     public static String baiduTrans(String query) {
+
         TransApi api = new TransApi(APP_ID, SECURITY_KEY);
         String dst=null;
         // 查询并解析结果
         try {
-
             // 查询并获取返回结果
             String json = (api.getTransResult(query, "auto", "auto"));
             // 通过Gson工具将json转换成TranslateResult对象

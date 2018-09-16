@@ -10,7 +10,7 @@ import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 import com.imooc.weixin.common.AccessTokenInfo;
 import com.imooc.weixin.entry.AccessToken;
-import com.imooc.weixin.main.MenuManager;
+import com.imooc.weixin.util.MenuManager;
 import com.imooc.weixin.util.NetWorkHelper;
 
 import javax.servlet.ServletException;

@@ -2,7 +2,7 @@ package com.imooc.weixin.util;
 
 import com.alibaba.fastjson.JSONException;
 import com.alibaba.fastjson.JSONObject;
-import com.imooc.Menu.Menu;
+import com.imooc.weixin.entry.Menu.Menu;
 
 import com.imooc.weixin.entry.AccessToken;
 import org.slf4j.Logger;

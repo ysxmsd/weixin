@@ -80,8 +80,7 @@ public class MessageHandlerUtil {
             String fromUserName = map.get("FromUserName");
             // 开发者微信号
             String toUserName = map.get("ToUserName");
-            result = String
-                    .format(
+            result = String.format(
                             "<xml>" +
                                     "<ToUserName><![CDATA[%s]]></ToUserName>" +
                                     "<FromUserName><![CDATA[%s]]></FromUserName>" +
@@ -129,6 +128,12 @@ public class MessageHandlerUtil {
                         "<Content><![CDATA[%s]]></Content>" + "</xml>",
                 fromUserName, toUserName, getUtcTime(), content);
     }
+
+
+
+
+
+
 
     private static String getUtcTime() {
         Date dt = new Date();// 如果不需要格式,可直接用dt,dt就是当前系统时间
