@@ -1,10 +1,13 @@
 package com.imooc.weixin.service;
 
 import com.imooc.weixin.entry.message.resp.TextMessage;
+import com.imooc.weixin.util.GenEntityMysql;
 import com.imooc.weixin.util.MessageUtil;
+import service.DBProcess;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.Map;
+
 
 /**
  * @author conshu
@@ -110,11 +113,11 @@ public class ReqService {
                     } else if (eventKey.equals("32")) {
                         respContent = "电影排行榜菜单项被点击！";
                     } else if (eventKey.equals("33")) {
-                        respContent = "幽默笑话菜单项被点击！";
+                        DBProcess dbp=new DBProcess();
+                        respContent=dbp.getPayRoller();
                     }
                 }
             }
-
             textMessage.setContent(respContent);
             respMessage = MessageUtil.textMessageToXml(textMessage);
         } catch (Exception e) {

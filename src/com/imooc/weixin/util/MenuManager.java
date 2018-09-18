@@ -1,9 +1,6 @@
 package com.imooc.weixin.util;
 
-import com.imooc.weixin.entry.Menu.Button;
-import com.imooc.weixin.entry.Menu.CommonButton;
-import com.imooc.weixin.entry.Menu.ComplexButton;
-import com.imooc.weixin.entry.Menu.Menu;
+import com.imooc.weixin.entry.Menu.*;
 import com.imooc.weixin.common.AccessTokenInfo;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -106,11 +103,11 @@ public class MenuManager {
 
             CommonButton btn32 = new CommonButton();
             btn32.setName("电影排行榜");
-            btn32.setType("click");
-            btn32.setKey("32");
+            btn32.setType("view");
+            btn32.setUrl("http://www.baidu.com");
 
             CommonButton btn33 = new CommonButton();
-            btn33.setName("幽默笑话");
+            btn33.setName("考勤查询2");
             btn33.setType("click");
             btn33.setKey("33");
 

@@ -12,6 +12,7 @@ package com.imooc.weixin.entry.Menu;
 
         private String type;
         private String key;
+        private String url;
 
         public String getType() {
             return type;
@@ -28,5 +29,15 @@ package com.imooc.weixin.entry.Menu;
         public void setKey(String key) {
             this.key = key;
         }
+
+        public String getUrl() {
+            return url;
+        }
+
+        public void setUrl(String url) {
+            this.url = url;
+        }
+
+
     }
 
